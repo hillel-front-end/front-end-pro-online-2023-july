@@ -48,7 +48,7 @@ for (let i = 0; i < mass4.length; i++) {
         maxIndex = i;
 
         min = sum;
-        minIndex = sum;
+        minIndex = i;
         continue;
     }
 
