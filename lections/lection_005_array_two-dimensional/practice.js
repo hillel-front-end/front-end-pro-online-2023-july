@@ -14,7 +14,6 @@ const mass4 = new Array(n);
 
 
 
-
 for (let i = 0; i < mass4.length; i++) {
     mass4[i] = new Array(m)
 
@@ -68,7 +67,6 @@ console.log(max, 'max');
 console.log(maxIndex, 'maxIndex');
 console.log(min, 'min');
 console.log(minIndex, 'minIndex');
-
 console.log(sums, 'sums');
 
 
