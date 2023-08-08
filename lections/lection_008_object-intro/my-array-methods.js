@@ -106,7 +106,7 @@ const titles = movies.map(function (item, index) {
 
 movies = movies.map(function (item) {
   return {
-    titles: item.Title,
+    title: item.Title,
     poster: item.Poster,
     year: item.Year,
   };
@@ -120,3 +120,74 @@ const filteredMovies = movies.filter(function (item, index) {
 });
 
 console.log(filteredMovies, "filteredMovies");
+
+// ---------------------
+
+// console.log(movies)
+// let totalBalances = 0;
+//
+// for ( ..) {
+//   totalBalances += users[i].balances;
+// }
+
+// [ 'a', 'b', 'c' ]
+
+let total = 0;
+
+total = movies.reduce(function (accumulation, current, index) {
+  // console.log(current, 'current');
+  // console.log(accumulation, 'accumulation')
+
+  return accumulation + Number(current.year);
+}, total)
+
+console.log(total / movies.length, 'total');
+
+//----------
+
+/*
+
+  {
+    "Harry Potter and the Deathly Hallows: Part 2": "2011",
+    "Harry Potter and the Sorcerer's Stone": "2001"
+  }
+
+ */
+
+const start = {};
+
+const obj = movies.reduce(toDo, start)
+
+function toDo(accum, current, index,  mass) {
+  console.log(mass, 'mass');
+  accum[current.year] = current.title;
+  return accum;
+}
+
+const arr = [
+  { year: 2022, title: 'a'},
+  { year: 2021, title: 'b'},
+  { year: 2020, title: 'c'},
+];
+
+const obj2 = arr.reduce(toDo, {});
+
+console.log(obj2, 'obj2');
+
+
+// const obj = movies.reduce(function (accum, current) {
+//   accum[current.year] = {
+//     poster: current.poster,
+//     title: current.title
+//   };
+//
+//   return accum;
+// }, start)
+
+const year = '2005';
+
+console.log(movies, 'movies');
+
+// console.log(obj[year], 'obj');
+
+console.log(obj, 'obj');
