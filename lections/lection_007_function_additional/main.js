@@ -182,3 +182,5 @@ loggerErrorWithTime('aaaaaa');
 //
 // const s = sumArray([1, 2, 3, 5]);
 // console.log(s ,' s');
+
+// Scope && Lexical Environment
