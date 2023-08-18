@@ -22,6 +22,8 @@ function sum() {
     }
 }
 
+
+console.log(sum, 'sum');
 const fn = sum();
 
 fn();
@@ -108,15 +110,18 @@ console.log(config, 'config');
 // console.log(config.next());
 // console.log(config.hasNext());
 
-while(config.hasNext()) {
+while (config.hasNext()) {
     console.log(config.next());
 }
 
 
 // ----------- Arrow -----------
 
-function dec() {}
-const expression = function () {}
+function dec() {
+}
+
+const expression = function () {
+}
 
 // ---> new
 
@@ -133,7 +138,7 @@ arrow(1, 2);
 
 const arrow2 = (a, b) => a + b;
 
-const arr = [{ a: 12}, { a : 13}];
+const arr = [{a: 12}, {a: 13}];
 arr.forEach((item) => console.log(item))
 
 const mass = arr.map(item => item.a);
@@ -209,18 +214,95 @@ const foo2 = foo.bind(obj3, 1, 2);
 
 console.log('------ My Bind -------');
 
-function myBind(context, arg1, arg2) {
-    // this = foo
-    // const fn = this;
-    return (arg3, arg4) => {
-        return this.apply(context, [arg1, arg2, arg3, arg4])
+const object = {
+    a: 1,
+    b: 1
+}
+
+
+function myBind(context) {
+    const selfFn = this;
+    const argsMyBind = [].slice.call(arguments, 1);
+
+    return function () {
+        const argsWrap = [].slice.call(arguments, 0);
+        const combineArgs = argsMyBind.concat(argsWrap);
+
+        return selfFn.apply(context, combineArgs);
     }
 }
 
-foo.myBind = myBind;
+sum2.myBind = myBind;
 
-foo3 = foo.myBind(obj3, 1, 2);
-foo3(3, 4);
+function sum2() {
+    console.log('--call sum2---', this);
+    console.log(arguments, 'arguments');
 
+    return this.a + this.b;
+}
+
+// console.log(sum2, 'sum original');
+//
+// console.dir(sum2, 'sum2');
+
+
+sum2Cp = sum2.myBind(object, 1, 2, 3, 4); // custom
+
+// result = sum2Cp(5, 6, 7)
+
+// result = sum2Cp('aaaa', 'bbb', 'ccc')
+
+// console.log(sum2Cp, 'sum2Cp from binde');
+
+// sum2.bind(); // original
+
+
+// result = sum2.call(object);
+// console.log(result, 'result');
 // console.dir(foo.myBind(obj3, 1, 2), 'foo');
 
+
+// -------- use case (Lost Context) ---------
+
+
+const operations = {
+    a: 1,
+    b: 12,
+    sum: function () {
+        console.log(this, 'this');
+        result = this.a + this.b;
+
+        console.log(result, 'result');
+    },
+    mul: function () {
+        return this.a * this.b;
+    }
+}
+
+
+// action = () => {}
+// action = action.bind(obj);
+// action(); undefined, window
+
+function doFunction(action) {
+    console.log(action, 'action');
+    result = action();
+    console.log(result, 'result');
+}
+
+// doFunction(operations.sum.bind(operations));
+
+// doFunction(() => operations.sum())
+// doFunction(operations.mul);
+
+// setTimeout(operations.sum.bind(operations), 3000)
+// setTimeout(() => operations.sum(), 3000)
+// let count = 0;
+// setInterval(() => {
+//     count++;
+//
+//     console.log(count, '--count--');
+//     operations.sum()
+// }, 3000)
+
+// -----------
