@@ -160,7 +160,7 @@ let [, , str, nestedArr] = mass;
 // console.log(bool, "bool");
 console.log(str, "str");
 
-function send({ url, path, port }) {
+function send(url, path, port) {
   console.log(url, path, port, "url, path, port");
 
   return {
@@ -170,12 +170,13 @@ function send({ url, path, port }) {
   };
 }
 
-const { a1 } = send({
-  path: "/posts",
-  url: "https://roga-ta-kopita",
-  port: 9009,
-});
+// const { a1 } = send({
+//   path: "/posts",
+//   url: "https://roga-ta-kopita",
+//   port: 9009,
+// });
 
+const { a1 } = send(9009, "https://roga-ta-kopita", "/posts");
 console.log(a1, "a1");
 // console.log(b1, "b1");
 
