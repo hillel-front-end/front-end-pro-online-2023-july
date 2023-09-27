@@ -85,8 +85,9 @@ const parent = {
 };
 
 const child = {
-  __proto__: parent,
+  // __proto__: parent,
 };
+child.__proto__ = parent;
 
 child.toDo();
 
@@ -206,3 +207,17 @@ console.log(imgInstance, "imgInstance");
 anchorInstance.redirect();
 
 anchorInstance.render();
+
+/*
+ 1. new --> {}
+ 2. call function constructor ( Person() )
+ 3. this => (1)
+ 4. { __proto__: Person.prototype}
+*/
+
+const mass4 = new Array();
+
+const div = new HTMLElement("div");
+
+// console.log(div.render(), 'div');
+// -------------------------------------
