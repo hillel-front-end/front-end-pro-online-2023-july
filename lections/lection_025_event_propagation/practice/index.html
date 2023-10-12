@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .list .list__item {
+            padding: 10px;
+            border: 1px solid red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul class="list">
+        <li class="list__item" data-action="open">open</li>
+        <li class="list__item" data-action="edit">edit</li>
+        <li class="list__item" data-action="remove">delete</li>
+    </ul>
+</body>
+<script src="index.js"></script>
+</html>
