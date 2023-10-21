@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .alert {
+           position: fixed;
+           right: 40px;
+           top: 40px;
+           
+           max-width: 200px;
+           min-width: 100px;
+
+           border-radius: 10px;
+           padding: 10px;
+           
+
+           opacity: 1;
+           z-index: 9;
+
+
+           transition: opecity .2s ease-in;
+        }
+
+        .fade {
+            opacity: 0;
+        }
+
+        .alert.error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert.success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert.info {
+            color: #004085;
+            background-color: #cce5ff;
+            border-color: #b8daff;
+        }
+
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" placeholder="input message" />
+        <label>
+            Error
+            <input type="radio" name="alert-type" value="error">
+        </label>
+        <label>
+            Info
+            <input type="radio" name="alert-type" value="info">
+        </label>
+        <label>
+            Success
+            <input checked type="radio" name="alert-type" value="success">
+        </label>
+        <br />
+        <br />
+        <button>show alert</button>
+    </form>
+
+    <script src="main.js"></script>
+</body>
+</html>
