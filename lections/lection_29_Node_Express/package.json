@@ -1,0 +1,23 @@
+{
+  "name": "lection_29_node_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.8.3",
+    "dotenv": "^16.3.1",
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mocha": "^10.2.0",
+    "webpack": "^5.89.0"
+  }
+}
