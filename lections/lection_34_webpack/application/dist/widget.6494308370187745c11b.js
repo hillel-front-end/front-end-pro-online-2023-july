@@ -1,1 +1,0 @@
-(()=>{"use strict";const o=new class{constructor(){console.log("I am widget")}};console.log(o,"widget 1")})();

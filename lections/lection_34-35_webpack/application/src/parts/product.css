@@ -1,0 +1,34 @@
+.product-item {
+    max-width: 350px;
+    background: #fff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .product-item .image-wrapper {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    transition: height 100ms ease-out;
+  }
+  .product-item .image-wrapper.shrink {
+    height: 40%;
+  }
+  .product-item .content-wrapper {
+    padding: 15px;
+  }
+  .product-item .content-wrapper .price {
+    margin: 10px 0;
+    font-weight: 300;
+  }
+  
+  .product-item .content-wrapper .description.show {
+    display: block;
+    opacity: 1;
+  }
+  .product-item .content-wrapper .actions {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    background: #fff;
+  }

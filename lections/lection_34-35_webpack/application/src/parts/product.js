@@ -1,10 +1,11 @@
+import "./product.css";
 import getPicture from "./picture";
 import getMainProductInfo from "./product-info";
 
 const getProduct = ({ thumbnail, ...product }) => {
   const picture = getPicture(thumbnail);
   const mainInfo = getMainProductInfo(product);
-  
+
   return `
   <section class="product-item">
     ${picture}

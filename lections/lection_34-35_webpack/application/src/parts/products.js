@@ -1,17 +1,15 @@
-import getProduct from "./product.js";
+import getProduct from "./product";
 
 const renderProducts = async (products) => {
   const template = `
       <article class="products">
-        ${products.map((product) => getProduct(product)).join("")}
+        ${products.map((product) => getProduct(product))}
       </article>
     `;
-
 
   document.body.innerHTML = template;
 };
 
-console.log("products");
+console.log("products2");
 
 export default renderProducts;
-
