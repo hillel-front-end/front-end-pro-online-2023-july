@@ -1,0 +1,9 @@
+{  
+    "parserOptions": {
+        "requireConfigFile": false
+    },
+   "rules": {
+        "no-unused-vars": "error"
+   },
+   "parser": "@babel/eslint-parser"
+}

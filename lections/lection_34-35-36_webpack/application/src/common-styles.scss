@@ -1,5 +1,12 @@
+@font-face {
+  font-family: 'Tinos-Regular';
+  src: url(./assets/Tinos-Regular.ttf);
+}
+
+
 * {
     box-sizing: border-box;
+    font-family: 'Tinos-Regular', Courier, monospace;
   }
   
   html {

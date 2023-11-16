@@ -2,6 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const ESLintPlugin =  require('eslint-webpack-plugin')
 
 console.log("----------");
 console.log(process.env.NODE_ENV, "process.env.NODE_ENV");
@@ -38,6 +40,10 @@ const webpack = {
       filename: "[name].[contenthash].css",
     }),
 
+    // new CopyPlugin({
+    //   patterns: [{ from: "./assets/config.json" }],
+    // }),
+    new ESLintPlugin(),
   ],
 
   module: {
@@ -58,7 +64,7 @@ const webpack = {
           "sass-loader",
         ],
       },
-      
+
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
@@ -67,6 +73,27 @@ const webpack = {
           options: {
             presets: ["@babel/preset-env"],
           },
+        },
+      },
+
+      {
+        test: /\.(ttf|woff2)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "fonts/[name][ext]",
+        },
+      },
+
+      {
+        test: /\.(xml|json)$/i,
+        type: "asset/source",
+      },
+      
+      {
+        test: /\.(jpeg|png)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "img/[name][ext]",
         },
       },
     ],
@@ -78,6 +105,16 @@ const webpack = {
       "...",
       new CssMinimizerPlugin(),
     ],
+    splitChunks: {
+      chunks: "all",
+    },
+  },
+
+  resolve: {
+    extensions: [".js", ".xml", ".json", ".jpeg"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
 
   devServer: {
