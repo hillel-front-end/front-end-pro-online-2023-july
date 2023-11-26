@@ -1,42 +1,68 @@
 export default class Router {
   #routes = [];
-  #original
+  #guardBefore = null;
 
   constructor(routes) {
     this.#routes = routes;
-
-    this.#original = history.pushState;
-
-    history.pushState = (...props) => {
-      this.#onPushState(...props)
-    };
-
   }
 
-  #onPushState(...props) {
-    this.#original.apply(history, [...props]); // change path
+  onInit() {
+    console.log('----onInit----');
+    const original = window.history.pushState;
+    window.history.pushState = this.#pushState.bind(this, original)
+    window.onpopstate = ({ state = {} }) => this.#onUpdate(state?.pathTo);// toDo: refactoring!
+    document.addEventListener('click', this.#onClickHandler.bind(this))
+    window.history.pushState({}, '', location.pathname);
+    console.log(location.pathname)
+  }
 
-    const route = this.#findRoute(location.pathname);
+  setGuardBefore(cb) {
+    if (!cb) return null;
 
-    if (route) {
-      this.#updateView(route.component);
+
+    this.#guardBefore = cb;
+  }
+
+
+  #pushState(original, state, title, pathTo) {
+    console.log('----My pushState----');
+
+    if (!pathTo) return;
+    // before
+    const pathFrom = location.pathname;
+
+    const next = (redirect = pathTo) => {
+      original.apply(history, [{ ...state, path: pathTo }, title, redirect]);
+      this.#onUpdate(redirect);
+    };
+
+    if (typeof this.#guardBefore === 'function') {
+      this.#guardBefore(pathTo, pathFrom, next)
+    } else {
+      next();
+    }
+  }
+
+  #onUpdate(path = location.pathname) {
+    const route = this.#findRoute(path) || this.#findRoute('*'); // toDo: refactoring
+    this.#updateView(route.component);
+  }
+
+  #onClickHandler(event) {
+    event.preventDefault();
+    const node = event.target;
+
+    if (node.dataset.routerLink) { // behaviour
+      window.history.pushState({}, '', node.dataset.routerLink)
     }
   }
 
   #findRoute(path) {
     if (!path) return null;
-
-    let route = this.#routes.find(route => route.path === path);
-
-    if (!route) {
-      route = this.#routes.find(route => route.path === '*');
-    }
-
-    return route;
+    return this.#routes.find(route => route.path === path);
   }
 
-
   #updateView(Component) {
-    document.querySelector('#app').innerHTML = new Component().render()
+    document.querySelector('.router-view').innerHTML = new Component().render()
   }
 }

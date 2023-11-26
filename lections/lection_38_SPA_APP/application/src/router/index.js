@@ -1,7 +1,7 @@
 import Router from "@/plugins/router";
 import Movies from "@/pages/movies";
-import SignIn from "@/pages/signIn";
-import NotFound from "@/pages/notFound";
+import SignIn from "@/pages/sign-in";
+import NotFound from "@/pages/not-found";
 
 
 const routes = [
@@ -10,7 +10,7 @@ const routes = [
     component: Movies
   },
   {
-    path: '/signIn',
+    path: '/sign-in',
     component: SignIn
   },
   {
@@ -22,4 +22,14 @@ const routes = [
 
 export const router = new Router(routes);
 
-console.log(router, 'router');
+
+const isAuth = false;
+
+router.setGuardBefore(function (to, from, next) {
+
+  if (to !== '/sign-in' && !isAuth) {
+    next('/sign-in')
+  } else {
+    next()
+  }
+})

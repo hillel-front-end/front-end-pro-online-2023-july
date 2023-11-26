@@ -9,7 +9,7 @@ const isDev = process.env.NODE_ENV === "development";
 
 const webpack = {
   mode: process.env.NODE_ENV,
-  entry: './index.js',
+  entry: './Index.js',
 
   output: {
     filename: '[name].[contenthash].js',
