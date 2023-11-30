@@ -75,12 +75,12 @@ const webpack = {
   },
 
   devServer: {
-    port: 9000,
-    hot: isDev,
-    open: isDev,
+    port: 3000,
+    hot: true,
+    open: true,
     static: {
-      directory: "./src",
-      watch: isDev,
+      directory: path.resolve(__dirname, 'src'),
+      watch: true,
     },
     historyApiFallback: true
   },

@@ -1,6 +1,11 @@
+import Observer from "@/plugins/Observer";
+
 export default class Router {
   #routes = [];
   #guardBefore = null;
+  #original = null
+
+  #observer = new Observer()
 
   constructor(routes) {
     this.#routes = routes;
@@ -8,12 +13,11 @@ export default class Router {
 
   onInit() {
     console.log('----onInit----');
-    const original = window.history.pushState;
-    window.history.pushState = this.#pushState.bind(this, original)
-    window.onpopstate = ({ state = {} }) => this.#onUpdate(state?.pathTo);// toDo: refactoring!
+    this.#original = window.history.pushState;
+    window.history.pushState = this.#pushState.bind(this)
+    window.onpopstate = () => this.#guard(location.pathname);
     document.addEventListener('click', this.#onClickHandler.bind(this))
     window.history.pushState({}, '', location.pathname);
-    console.log(location.pathname)
   }
 
   setGuardBefore(cb) {
@@ -23,16 +27,26 @@ export default class Router {
     this.#guardBefore = cb;
   }
 
+  subscribePageLoaded(cb) {
+    this.#observer.subscribe(cb)
+  }
 
-  #pushState(original, state, title, pathTo) {
+
+  #pushState(state, title, pathTo) {
     console.log('----My pushState----');
 
     if (!pathTo) return;
     // before
     const pathFrom = location.pathname;
 
+    this.#guard(pathTo, pathFrom)
+
+  }
+
+  #guard(pathTo, pathFrom) {
     const next = (redirect = pathTo) => {
-      original.apply(history, [{ ...state, path: pathTo }, title, redirect]);
+      this.#original.apply(history, [{ pathTo, pathFrom }, null, redirect]);
+      // history.pushState(state, null, '/path');
       this.#onUpdate(redirect);
     };
 
@@ -43,9 +57,11 @@ export default class Router {
     }
   }
 
+
   #onUpdate(path = location.pathname) {
     const route = this.#findRoute(path) || this.#findRoute('*'); // toDo: refactoring
     this.#updateView(route.component);
+    this.#handlePageLoaded();
   }
 
   #onClickHandler(event) {
@@ -63,6 +79,20 @@ export default class Router {
   }
 
   #updateView(Component) {
-    document.querySelector('.router-view').innerHTML = new Component().render()
+    // setTimeout(() => {
+    //   document.querySelector('.router-view').innerHTML = new Component().render()
+    //
+    // }, 3000)
+
+    const routerView = document.querySelector('.router-view');
+    routerView.innerHTML = '';
+    routerView.append(new Component().render())
+
+    //all
+  }
+
+
+  #handlePageLoaded() {
+    this.#observer.broadcast()
   }
 }

@@ -1,7 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
+@import "./src/common/styles/_vars.scss";
 
-$header_color: #212529;
-$header_height: 100px;
 
 html, body {
   margin: 0;

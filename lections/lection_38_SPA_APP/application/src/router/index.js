@@ -23,7 +23,7 @@ const routes = [
 export const router = new Router(routes);
 
 
-const isAuth = false;
+const isAuth = true;
 
 router.setGuardBefore(function (to, from, next) {
 
@@ -33,3 +33,11 @@ router.setGuardBefore(function (to, from, next) {
     next()
   }
 })
+
+
+
+//
+// router.subscribePageLoaded(function () {
+//   console.log('--- hook page loaded ---')
+//   // console.log(document.querySelector('#app .router-view').outerHTML)
+// })
