@@ -1,18 +1,11 @@
 import './signin.scss';
 import Component from "@/plugins/Component";
 import {router} from "@/router";
-import Input from "@/common/components/Input";
+import Input from "@/common/components/Input/Input";
 
 export default class SignIn extends Component {
   credentials = { login: '', password: '' };
 
-  onChangeLogin() {
-    console.log('---change login --')
-  }
-
-  onChangePassword() {
-    console.log('---change password --')
-  }
 
   getTemplate() {
     return `
@@ -21,26 +14,13 @@ export default class SignIn extends Component {
                 <div class="card-body">
                   <h5 class="card-title text-center mb-3"> Sign In </h5>
                   <div class="mb-2">
-                    ${new Input({ 
-                        type: 'text', 
-                        className: 'login form-control', 
-                        placeholder: 'login',
-                        name: 'login',
-                        id: 'login',
-                        label: 'Input Login'
-                    }).render()}
+                    <slot name="login" ></slot>
                   </div>
                   <div class="mb-2">
-                     ${new Input({
-                          type: 'password',
-                          className: 'password form-control',
-                          placeholder: 'password',
-                          name: 'password',
-                          id: 'password',
-                          label: 'Input Password',
-                          // onChange: function(){}
-                      }).render()}
+                    <slot name="password"></slot>
                   </div>
+                  
+                  <slot name="table"></slot>
                   <button type="button" class="btn btn-success">Sign in</button>
                 </div>
             </div>
@@ -48,17 +28,64 @@ export default class SignIn extends Component {
     `
   }
 
+  onChange(value) {
+    console.log('--- call onChange in  SignIn--',  value);
+
+    this.credentials = {
+      ...this.credentials,
+      ...value
+    };
+
+    console.log(this.credentials, 'credentials')
+  }
+
+
+
+  updateTemplate(container) {
+    const inputLogin = new Input({
+      type: 'text',
+      className: 'login form-control',
+      placeholder: 'login',
+      name: 'login',
+      id: 'login',
+      label: 'Input Login',
+      onChange: this.onChange.bind(this),
+      // credentials: this.credentials
+    });
+
+    const inputPassword = new Input({
+      type: 'password',
+      className: 'password form-control',
+      placeholder: 'password',
+      name: 'password',
+      id: 'password',
+      label: 'Input Password',
+      onChange:  this.onChange.bind(this),
+      // credentials: this.credentials bad practice -> instead state lifting
+    });
+
+    this.replaceSlot(container, [
+      { selector: 'slot[name="login"]', replacer: () => inputLogin.render() },
+      { selector: 'slot[name="password"]', replacer: () => inputPassword.render() },
+    ])
+
+    return container;
+  }
+
+  onClickHandler() {
+    console.log('click');
+  }
+
+  bindEvent(container) {
+    container.querySelector('button').addEventListener('click', this.onClickHandler.bind(this));
+  }
+
   render() {
     const container = document.createElement('div')
-    const template = this.getTemplate();
+    container.innerHTML = this.getTemplate();
 
-    console.log('--call render---');
-
-    container.innerHTML = template;
-
-    container.querySelector('#login').addEventListener('change', this.onChangeLogin.bind(this))
-    // container.querySelector('#password').addEventListener('change', this.onChangePassword.bind(this))
-
+    this.updateTemplate(container)
+    this.bindEvent(container);
 
     return container;
   }
@@ -122,3 +149,6 @@ export default class SignIn extends Component {
 // setTimeout(() => {
 //   document.querySelector('#app .router-view').append(container);
 // }, 3000)
+
+// https://www.npmjs.com/package/sanitize-html
+

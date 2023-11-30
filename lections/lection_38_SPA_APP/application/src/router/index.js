@@ -1,6 +1,6 @@
 import Router from "@/plugins/router";
 import Movies from "@/pages/movies";
-import SignIn from "@/pages/sign-in";
+import SignIn from "@/pages/sign-in/SignIn";
 import NotFound from "@/pages/not-found";
 
 
@@ -23,7 +23,7 @@ const routes = [
 export const router = new Router(routes);
 
 
-const isAuth = true;
+const isAuth = false;
 
 router.setGuardBefore(function (to, from, next) {
 
