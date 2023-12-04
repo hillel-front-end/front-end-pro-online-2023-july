@@ -1,3 +1,4 @@
+import './Input.scss'
 import Component from "@/plugins/Component";
 
 export default class Input extends Component {
@@ -43,9 +44,9 @@ export default class Input extends Component {
     )
   }
 
-
   render() {
     const container = document.createElement('div')
+    container.classList.add('input-wrapper')
     container.innerHTML = this.getTemplate();
 
     this.bindEvent(container);

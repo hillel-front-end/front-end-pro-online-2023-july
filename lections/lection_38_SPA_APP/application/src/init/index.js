@@ -1,6 +1,9 @@
 
 
 export default function init(App, libs) {
+  libs.store?.onInit();
+
   document.querySelector('#app').append(new App().render());
-  libs.forEach(lib => lib.onInit());
+
+  libs.router?.onInit()
 }

@@ -1,7 +1,7 @@
 import './signin.scss';
 import Component from "@/plugins/Component";
-import {router} from "@/router";
 import Input from "@/common/components/Input/Input";
+import { mutation_types, store } from "@/store";
 
 export default class SignIn extends Component {
   credentials = { login: '', password: '' };
@@ -72,8 +72,16 @@ export default class SignIn extends Component {
     return container;
   }
 
-  onClickHandler() {
+  onClickHandler() { // { name, lastName, role, rule }
     console.log('click');
+
+    // axios.post('/sign-in', this.credentials)
+
+    store.dispatch(
+        mutation_types.CHANGE_NOTIFY_CONFIG,
+        { type: 'danger', message: 'Hello from sign in page' }
+    );
+
   }
 
   bindEvent(container) {

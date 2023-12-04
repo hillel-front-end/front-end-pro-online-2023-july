@@ -1,5 +1,6 @@
 export default class Observer {
   observers = [];
+  // observers = [fn, fn, fn];
 
   subscribe(fn) {
     if (typeof fn === "function") {

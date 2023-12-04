@@ -1,6 +1,7 @@
 import './notification.scss'
 import Queue from "@/plugins/Queue";
 import Component from "@/plugins/Component";
+import {mutation_types, store} from "@/store";
 
 export default class Notification extends Component{
   #mls = null;
@@ -12,6 +13,9 @@ export default class Notification extends Component{
 
 
     this.#queue = new Queue(this.updateNotification.bind(this));
+    store.subscribe(mutation_types.CHANGE_NOTIFY_CONFIG, (payload) => {
+      this.addMessage(payload)
+    })
   }
 
   updateNotification(config) {
@@ -20,7 +24,7 @@ export default class Notification extends Component{
     setTimeout(() => {
       this.#hide(config.type);
       this.#queue.next();
-    }, this.props.mls || 5000);
+    }, 5000);
   }
 
   addMessage(config) {
@@ -29,10 +33,10 @@ export default class Notification extends Component{
     }
   }
 
-  // notification fade => notification success => notification info fade => aler fade
+  // notification fade => notification success => notification info fade => alert fade
 
-  #show(config) {
-    this.#notificationNode.classList.add(config.type);
+  #show(config) { // { message: '', type: 'error' }
+    this.#notificationNode.classList.add('alert-' + config.type);
     this.#notificationNode.innerText = config.message;
     this.#notificationNode.classList.remove("fade");
   }
@@ -40,22 +44,14 @@ export default class Notification extends Component{
   #hide(type) {
     this.#notificationNode.classList.add("fade");
     this.#notificationNode.innerText = "";
-    this.#notificationNode.classList.remove(type);
+    this.#notificationNode.classList.remove('alert-' + type);
   }
 
 
-  getTemplate() {
-    return `
-      <div class="alert alert-danger" role="alert">
-            A simple warning alert—check it out!
-      </div>
-    `
-  }
 
   render() {
     this.#notificationNode = document.createElement("div");
-    this.#notificationNode.classList.add("notification-wrapper", "fade");
-    this.#notificationNode.innerHTML = this.getTemplate();
+    this.#notificationNode.classList.add("notification", "alert", "fade");
 
     return this.#notificationNode;
   }
