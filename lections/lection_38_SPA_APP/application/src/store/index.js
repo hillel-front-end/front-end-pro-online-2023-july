@@ -1,4 +1,4 @@
-import Store from "@/plugins/store";
+import Store from "@/plugins/Store";
 
 
 const state = {

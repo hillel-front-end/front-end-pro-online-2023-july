@@ -1,4 +1,4 @@
-import Router from "@/plugins/router";
+import Router from "@/plugins/Router";
 import Movies from "@/pages/movies";
 import SignIn from "@/pages/sign-in/SignIn";
 import NotFound from "@/pages/not-found";
