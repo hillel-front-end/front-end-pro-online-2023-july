@@ -60,11 +60,11 @@ const LOAN_TYPES = {
 };
 
 export const calculateLoan = ({ loanType, ...args }) => {
-  console.log(loanType, 'loanType' );
-  console.log(LOAN_TYPES[loanType], 'LOAN_TYPES[loanType]' );
+  // console.log(loanType, 'loanType' );
+  // console.log(LOAN_TYPES[loanType], 'LOAN_TYPES[loanType]' );
   if (!loanType || !LOAN_TYPES[loanType]) return [];
 
-  console.log(123);
+
   // if (loanType === 'classic') {
   //     return LOAN_TYPES.classic(args)
   // } else if (loanType === 'annuity') {

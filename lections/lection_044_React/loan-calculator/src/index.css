@@ -228,3 +228,14 @@ select::-ms-expand {
   font-weight: bold;
   color: #009879;
 }
+
+.empty-table {
+  padding: 10px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.invalid {
+  text-align: left;
+  color: red;
+}
