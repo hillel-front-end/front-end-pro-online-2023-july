@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { calculateLoan } from "./tools/calculate-loan";
+import { USER_INPUTS_FIELDS } from "./components/UserInput/UserInput.config";
 import Header from "./components/Header";
 import UserInput from "./components/UserInput";
 import Result from "./components/Result";
 
 const initialUseState = {
-  price: 10000,
-  firstPayment: 0,
-  term: 3,
-  rate: 25,
-  loanType: "classic",
+  [USER_INPUTS_FIELDS.price]: 0,
+  [USER_INPUTS_FIELDS.firstPayment]: 0,
+  [USER_INPUTS_FIELDS.term]: 3,
+  [USER_INPUTS_FIELDS.rate]: 25,
+  [USER_INPUTS_FIELDS.loanType]: "classic",
 };
 
 function App() {

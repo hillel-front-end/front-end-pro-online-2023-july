@@ -55,7 +55,6 @@ body {
   position: relative;
   padding: 15px 0 0px;
   margin-top: 10px;
-  width: 35%;
 }
 
 
@@ -115,6 +114,12 @@ body {
 
 .form__field:required,:invalid {
   box-shadow:none;
+
+}
+
+
+.invalid .form__field { 
+  border-bottom: 2px solid red;
 }
 
 /* ---- finish input ------*/
@@ -201,18 +206,18 @@ select::-ms-expand {
   text-align: left;
 }
 
-#result thead tr {
+.cutom-table thead tr {
   background-color: #009879;
   color: #ffffff;
   text-align: left;
 }
 
-#result th,
-#result td {
+.cutom-table th,
+.cutom-table td {
   padding: 12px 15px;
 }
 
-#result tbody tr {
+.cutom-table tbody tr {
   border-bottom: 1px solid #dddddd;
 }
 
@@ -220,11 +225,11 @@ select::-ms-expand {
   background-color: #f3f3f3;
 }
 
-#result tbody tr:last-of-type {
+.cutom-tabletbody tr:last-of-type {
   border-bottom: 2px solid #009879;
 }
 
-#result tbody tr.active-row {
+.cutom-table tbody tr.active-row {
   font-weight: bold;
   color: #009879;
 }
@@ -235,7 +240,7 @@ select::-ms-expand {
   font-weight: bold;
 }
 
-.invalid {
+.error-message {
   text-align: left;
   color: red;
 }
