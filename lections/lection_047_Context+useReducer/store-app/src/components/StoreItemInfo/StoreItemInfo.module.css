@@ -1,0 +1,15 @@
+
+.storeItemInfoTitle {
+    margin: 0px;
+    font-size: 20px;
+  }
+  
+  .storeItemInfoDescription {
+    margin: 10px 0px;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+  }
+  
+  .storeItemInfoPrice {
+    font-size: 1.1rem;
+  }

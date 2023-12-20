@@ -1,0 +1,18 @@
+
+.storeItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+  
+  
+.imageWrapper {
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
+    transition: height 100ms ease-out;
+  }
+  
+ .contentWrapper {
+    padding: 15px;
+  }

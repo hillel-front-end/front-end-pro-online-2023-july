@@ -1,0 +1,24 @@
+:root {
+    --count_in_row: 5;
+    --gap: 15px;
+  }
+  
+  .availableStoreItems {
+    display: flex;
+    flex-wrap: wrap;
+      gap: var(--gap);
+    
+    /* transform: scale(0); */
+    transition: transform 0.5s ease-in-out 0.5s;
+  }
+  
+  .availebleStoreItemsLoaded {
+    transform: scale(1);
+  }
+  
+  .availableStoreItem {
+    margin-top: 10px;
+    flex: 1 0 21%;
+    max-width: calc((100% / var(--count_in_row)) - 15px);
+  }
+  
