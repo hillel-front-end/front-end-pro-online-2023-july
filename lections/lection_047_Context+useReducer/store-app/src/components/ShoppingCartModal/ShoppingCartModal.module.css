@@ -1,0 +1,29 @@
+ .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+ .container {
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px;
+  }
+  
+  
+.action {
+    font-size: 14px;
+    font-family: ‘Open Sans’;
+    font-weight: 600;
+    color: #e44c4c;
+    cursor: pointer;
+    border-bottom: 1px solid #e44c4c;
+  }
+
+  .title {
+    font-size: 20px;
+    font-family: ‘Open Sans’;
+    font-weight: 700;
+    color: #2f3841;
+  }
+  

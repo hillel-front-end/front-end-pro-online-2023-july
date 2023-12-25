@@ -4,13 +4,13 @@ import styles from "./Header.module.css";
 import { useShoppingCart } from "../../store/ShoppingCartProvider";
 
 export default function Header() {
-  const { cartQuantity } = useShoppingCart();
+  const { cartQuantity, openModal } = useShoppingCart();
 
   return (
     <header className={styles.header}>
       <Container className={styles.headerContent}>
         <h1 className={styles.logo}>Apple Store</h1>
-        <CartButton quantity={cartQuantity} />
+        <CartButton quantity={cartQuantity} onClick={openModal} />
       </Container>
     </header>
   );

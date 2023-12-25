@@ -1,4 +1,5 @@
 import AvailableStoreItems from "../AvailableStoreItems";
+import ShoppingCartModal from "../ShoppingCartModal";
 
 const STORE_ITEMS = [
   {
@@ -74,6 +75,7 @@ export default function StoreItems() {
   return (
     <>
       <AvailableStoreItems storeItems={STORE_ITEMS} />
+      <ShoppingCartModal storeItems={STORE_ITEMS} />
     </>
   );
 }

@@ -1,0 +1,15 @@
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    cursor: pointer;
+}
+  
+.pictureWrapper {
+    width: 15%;
+    text-align: center;
+}
+  
+  

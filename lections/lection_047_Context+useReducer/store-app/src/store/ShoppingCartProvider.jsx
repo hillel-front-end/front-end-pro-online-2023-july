@@ -75,14 +75,15 @@ export default function ShoppingCartProvider({ children }) {
 
   console.log(state, "state");
 
-  const addToCart = (storeItem) => {
-    dispatch({ type: "ADD_TO_CART", payload: storeItem });
+  const addToCart = (item) => {
+    dispatch({ type: "ADD_TO_CART", payload: item });
   };
 
   const context = {
     ...state,
     modalVisibility,
-    setModalVisibilty,
+    openModal: () => setModalVisibilty(true),
+    closeModal: () => setModalVisibilty(false),
     addToCart,
   };
 

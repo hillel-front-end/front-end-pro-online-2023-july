@@ -11,12 +11,12 @@ export default function AvailableStoreItems({ storeItems = [] }) {
     <div className={style.availableStoreItems}>
       {!isStoreEmpty &&
         storeItems.map((storeItem) => (
-          <Card className={style.availableStoreItem}>
-              <StoreItem
-                storeItem={storeItem}
-                addToCart={() =>
-                  addToCart({ id: storeItem.id, price: storeItem.price })
-                }
+          <Card className={style.availableStoreItem} key={storeItem.id}>
+            <StoreItem
+              storeItem={storeItem}
+              addToCart={() =>
+                addToCart({ id: storeItem.id, price: storeItem.price })
+              }
             />
           </Card>
         ))}
