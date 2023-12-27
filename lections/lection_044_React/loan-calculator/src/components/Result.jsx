@@ -1,5 +1,6 @@
 import Table from "../UI/Table";
 import { formatter } from "../tools";
+import { memo } from 'react' // useMemo !== memo
 
 const COLUMN_ORDER = [
   "loanBody",
@@ -20,6 +21,8 @@ function Result({ loanSheet }) {
     color: "white",
     paddingTop: "10px",
   };
+
+  console.log("---rander Result---");
 
   const thead = (
     <tr style={styleAttr}>
@@ -44,8 +47,18 @@ function Result({ loanSheet }) {
   );
 }
 
-export default Result;
+export default memo(Result);
+// export default Result;
 
+
+
+// function memo(cmp) {
+//   return (
+//     <>
+//      <cmp></cmp>
+//     </>
+//   )
+// }
 // <table id="result">
 //   <thead>
 // <tr>
